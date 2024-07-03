@@ -4,7 +4,7 @@
 
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fa-brands fa-phoenix-squadron"></i>
                 </div>
@@ -12,16 +12,21 @@
             </a>
 
             <hr class="sidebar-divider my-0">
-            
+
             <li class="nav-item" id="pengguna">
-                <a class="nav-link" href="{{ route('admin') }}">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Pengguna</span></a>
+                <a class="nav-link" href="{{ route('dashboard') }}">
+                    <i class="fas fa-fw fa-tachometer"></i>
+                    <span>Dashboard</span></a>
+            </li>
+            <li class="nav-item" id="pengguna">
+                <a class="nav-link" href="{{ route('pangkat.index') }}">
+                    <i class="fas fa-fw fa-angle-double-up"></i>
+                    <span>Pangkat</span></a>
             </li>
             <li class="nav-item" id="log_pengguna">
                 <a class="nav-link" href="">
                     <i class="fas fa-fw fa-history"></i>
-                    <span>Log Pengguna</span></a>
+                    <span>Berkala</span></a>
             </li>
 
             <hr class="sidebar-divider d-none d-md-block">

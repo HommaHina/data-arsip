@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PangkatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () { return view('login'); })->name('login');
-Route::post('/login_aksi', [utamaController::class,'login_aksi'])->name('login_aksi');
-Route::get('/logout', [utamaController::class,'logout'])->name('logout');
+Route::post('/login_aksi', [AdminController::class,'login_aksi'])->name('login_aksi');
+Route::get('/logout', [AdminController::class,'logout'])->name('logout');
+
+Route::group(['prefix' => 'admin'], function(){
+    Route::get('/', [AdminController::class, 'Dashboard'] )->name('dashboard');
+    Route::resource('pangkat', PangkatController::class);
+ });
+

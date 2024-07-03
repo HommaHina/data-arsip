@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('nip');
             $table->text('jabatan');
+            $table->text('gol');
             $table->text('pangkatakhir');
             $table->text('pangkatdatang');
             $table->text('ket');
