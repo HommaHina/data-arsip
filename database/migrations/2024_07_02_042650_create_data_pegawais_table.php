@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('data_pegawais', function (Blueprint $table) {
             $table->id();
-            $table->text('pasfoto');
+            $table->text('pasfoto')->nullable();
             $table->text('nip');
             $table->text('nama');
             $table->text('nohp');

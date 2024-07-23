@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PangkatController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\BerkalaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +22,9 @@ Route::post('/login_aksi', [AdminController::class,'login_aksi'])->name('login_a
 Route::get('/logout', [AdminController::class,'logout'])->name('logout');
 
 Route::group(['prefix' => 'admin'], function(){
-    Route::get('/', [AdminController::class, 'Dashboard'] )->name('dashboard');
+    Route::get('/', [AdminController::class, 'dashboard'] )->name('dashboard');
+    Route::resource('pegawai', PegawaiController::class);
     Route::resource('pangkat', PangkatController::class);
+    Route::resource('berkala', BerkalaController::class);
  });
 

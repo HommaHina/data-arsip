@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\data_pangkat;
+use App\Models\data_berkala;
 use App\Models\data_pegawai;
 
 use Alert;
 
-class PangkatController extends Controller
+class BerkalaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,15 +16,15 @@ class PangkatController extends Controller
     public function index()
     {
 
-        // confirm delete
-        $title = 'Hapus Data!';
-        $text = "Apakah Anda Yakin?";
-        confirmDelete($title, $text);
+          // confirm delete
+          $title = 'Hapus Data!';
+          $text = "Apakah Anda Yakin?";
+          confirmDelete($title, $text);
 
 
-        $data = data_pangkat::orderBy('pangkatdatang','ASC')->with('DPegawai')->get();
-        $dataPegawai = data_pegawai::all();
-        return view('admin.pangkat.index', compact('data','dataPegawai'));
+          $data = data_berkala::with('DPegawai')->get();
+          $dataPegawai = data_pegawai::all();
+          return view('admin.berkala.index', compact('data','dataPegawai'));
     }
 
     /**
@@ -32,8 +32,9 @@ class PangkatController extends Controller
      */
     public function create()
     {
-
+        //
     }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -42,23 +43,21 @@ class PangkatController extends Controller
         $validasi = $request->validate([
             'nip' => 'required',
             'jabatan' => 'required|string',
-            'gol' => 'required|string',
-            'pangkatakhir' => 'required|date',
-            'pangkatdatang' => 'required|date',
+            'berkalaakhir' => 'required|date',
+            'berkaladatang' => 'required|date',
             'ket' => '',
         ],
         [
             'nip.required'=> 'NIP Harus Diisi!!',
             'jabatan.required'=> 'Jabatan Harus Diisi!!',
-            'gol.required'=> 'Gol Harus Diisi!!',
-            'pangkatakhir.required'=> 'Pangkat Akhir Harus Diisi!!',
-            'pangkatdatang.required'=> 'Pangkat Datang Harus Diisi!!',
+            'berkalaakhir.required'=> 'Berkala Akhir Harus Diisi!!',
+            'berkaladatang.required'=> 'Berkala Datang Harus Diisi!!',
         ]);
 
-        $save = data_pangkat::create($validasi);
+        $save = data_berkala::create($validasi);
         if($save == true){
             Alert::success('Data berhasil Ditambahkan');
-            return redirect()->route('pangkat.index');
+            return redirect()->route('berkala.index');
         }
         else{
             Alert::error('Data Gagal Ditambahkan');
@@ -66,6 +65,13 @@ class PangkatController extends Controller
         }
     }
 
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -80,25 +86,24 @@ class PangkatController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = data_pangkat::findorfail($id);
+        $data = data_berkala::findorfail($id);
         $validasi = $request->validate([
             'jabatan' => 'required|string',
-            'gol' => 'required|string',
-            'pangkatakhir' => 'required|date',
-            'pangkatdatang' => 'required|date',
+            'berkalaakhir' => 'required|date',
+            'berkaladatang' => 'required|date',
             'ket' => '',
         ],
         [
+            'nip.required'=> 'NIP Harus Diisi!!',
             'jabatan.required'=> 'Jabatan Harus Diisi!!',
-            'gol.required'=> 'Gol Harus Diisi!!',
-            'pangkatakhir.required'=> 'Pangkat Akhir Harus Diisi!!',
-            'pangkatdatang.required'=> 'Pangkat Datang Harus Diisi!!',
+            'berkalaakhir.required'=> 'Berkala Akhir Harus Diisi!!',
+            'berkaladatang.required'=> 'Berkala Datang Harus Diisi!!',
         ]);
 
         $ubah = $data->update($validasi);
         if($ubah == true){
             Alert::success('Data berhasil Diubah');
-            return redirect()->route('pangkat.index');
+            return redirect()->route('berkala.index');
         }
         else{
             Alert::error('Data Gagal Diubah');
@@ -111,11 +116,11 @@ class PangkatController extends Controller
      */
     public function destroy(string $id)
     {
-        $getID = data_pangkat::findorfail($id);
+        $getID = data_berkala::findorfail($id);
         $hps = $getID->delete();
         if($hps == true){
             Alert::success('Data berhasil Dihapus');
-            return redirect()->route('pangkat.index');
+            return redirect()->route('berkala.index');
         }
         else{
             Alert::error('Data Gagal Dihapus');

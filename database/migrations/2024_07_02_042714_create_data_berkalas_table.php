@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('jabatan');
             $table->text('berkalaakhir');
             $table->text('berkaladatang');
-            $table->text('ket');
+            $table->text('ket')->nullable();
             $table->timestamps();
         });
     }

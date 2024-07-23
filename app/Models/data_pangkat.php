@@ -15,6 +15,6 @@ class data_pangkat extends Model
 
     public function DPegawai()
     {
-        return $this->belongsTo(data_pegawai::class, 'nip', 'id');
+        return $this->belongsTo(data_pegawai::class, 'nip', 'nip');
     }
 }

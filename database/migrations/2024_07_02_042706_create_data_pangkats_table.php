@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('gol');
             $table->text('pangkatakhir');
             $table->text('pangkatdatang');
-            $table->text('ket');
+            $table->text('ket')->nullable();
             $table->timestamps();
         });
     }

@@ -19,12 +19,18 @@
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item" id="pengguna">
+                <a class="nav-link" href="{{ route('pegawai.index') }}">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Pegawai</span></a>
+            </li>
+
+            <li class="nav-item" id="pengguna">
                 <a class="nav-link" href="{{ route('pangkat.index') }}">
                     <i class="fas fa-fw fa-angle-double-up"></i>
                     <span>Pangkat</span></a>
             </li>
             <li class="nav-item" id="log_pengguna">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('berkala.index') }}">
                     <i class="fas fa-fw fa-history"></i>
                     <span>Berkala</span></a>
             </li>
@@ -41,7 +47,7 @@
 
             <div id="content">
 
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <ul class="navbar-nav ml-auto">
 
@@ -69,3 +75,5 @@
                     </ul>
 
                 </nav>
+
+
