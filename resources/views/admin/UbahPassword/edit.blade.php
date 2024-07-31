@@ -10,12 +10,20 @@
         <h3 class="mb-0 text-gray-800 font-weight-bold">UBAH PASSWORD </h3>
     </div>
 
-    <div class="card">
+    <div class="card" id="card">
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="hero-ubah-password col-md-6">
 
-                    <div id="alert"></div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
                     <form action="{{ route('UbahPassword') }}" method="post">
                        @csrf
@@ -54,14 +62,3 @@
 @section ('active')
 @endsection
 
-<script>
-    $(document).ready(function () {
-        @if($errors->any())
-            var errorMassage = '';
-            @foreach($errors->all() as $error)
-                errorMassage += '<li>{{ $error }}</li>';
-            @endforeach
-            $('#alert').prepend('<div class="alert alert-danger" id="alert">' + errorMassage + '</div>');
-        @endif
-    });
-</script>

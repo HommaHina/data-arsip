@@ -67,11 +67,11 @@ class AdminController extends Controller
             'passwordLama.required'=> 'Password Lama Harus Diisi!!',
             'passwordBaru.required'=> 'Password Baru Harus Diisi!!',
             'konfirmasipassword.required'=> 'Konfirmasi Password Harus Diisi!!',
-            'passwordLama.min'=> 'minimal 5 Angka',
-            'passwordBaru.min'=> 'minimal 5 Angka',
-            'konfirmasipassword.min'=> 'minimal 5 Angka',
+            'passwordLama.min'=> 'Password Lama minimal 5 Angka',
+            'passwordBaru.min'=> 'Password Baru minimal 5 Angka',
+            'konfirmasipassword.min'=> 'Konfirmasi Password minimal 5 Angka',
             'passwordBaru.required_with'=> 'Harus sama konfirmasi Password',
-            'passwordBaru.same'=> 'Harus sama konfirmasi Password'
+            'passwordBaru.same'=> 'Password Baru dan Konfirmasi Password Harus Sama'
         ]
         );
 
@@ -94,7 +94,7 @@ class AdminController extends Controller
                 return redirect()->to('/');
             }
             else{
-                Alert::error('Password Gagal Diubah');
+                Alert::error('Gagal');
                 return redirect()->back();
             }
         }
@@ -103,8 +103,5 @@ class AdminController extends Controller
             return redirect()->back();
         }
 
-        // $id = session('id');
-        // $cekid = user::findorfail($id);
-        // if($cek)
     }
 }
