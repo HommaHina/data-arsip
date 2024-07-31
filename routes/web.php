@@ -26,5 +26,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('pegawai', PegawaiController::class);
     Route::resource('pangkat', PangkatController::class);
     Route::resource('berkala', BerkalaController::class);
- });
+    Route::get('ubah-password', [AdminController::class, 'IndexPassword'] )->name('IndexPassword');
+    Route::post('ubah-password', [AdminController::class, 'UbahPassword'] )->name('UbahPassword');
+});
 
