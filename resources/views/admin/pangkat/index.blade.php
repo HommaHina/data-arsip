@@ -260,10 +260,7 @@
     });
 
     $(document).ready(function () {
-        $("#pengguna").addClass("active");
-        // $("#pengguna1").addClass("show");
-        // $("#sub").addClass("active");
-        //   document.getElementById("#sub2").style.color = '#0036FF';
+        $("#perangkat").addClass("active");
     });
 
 </script>

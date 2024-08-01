@@ -21,7 +21,7 @@ Route::get('/', function () { return view('login'); })->name('login');
 Route::post('/login_aksi', [AdminController::class,'login_aksi'])->name('login_aksi');
 Route::get('/logout', [AdminController::class,'logout'])->name('logout');
 
-Route::group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => 'admin','middleware' => 'ceklog'], function(){
     Route::get('/', [AdminController::class, 'dashboard'] )->name('dashboard');
     Route::resource('pegawai', PegawaiController::class);
     Route::resource('pangkat', PangkatController::class);

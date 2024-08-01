@@ -13,23 +13,23 @@
 
             <hr class="sidebar-divider my-0">
 
-            <li class="nav-item" id="pengguna">
+            <li class="nav-item" id="beranda">
                 <a class="nav-link" href="{{ route('dashboard') }}">
                     <i class="fas fa-fw fa-tachometer"></i>
                     <span>Dashboard</span></a>
             </li>
-            <li class="nav-item" id="pengguna">
+            <li class="nav-item" id="pegawai">
                 <a class="nav-link" href="{{ route('pegawai.index') }}">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Pegawai</span></a>
             </li>
 
-            <li class="nav-item" id="pengguna">
+            <li class="nav-item" id="perangkat">
                 <a class="nav-link" href="{{ route('pangkat.index') }}">
                     <i class="fas fa-fw fa-angle-double-up"></i>
                     <span>Pangkat</span></a>
             </li>
-            <li class="nav-item" id="log_pengguna">
+            <li class="nav-item" id="berkala">
                 <a class="nav-link" href="{{ route('berkala.index') }}">
                     <i class="fas fa-fw fa-history"></i>
                     <span>Berkala</span></a>

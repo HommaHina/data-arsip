@@ -187,5 +187,10 @@
 @endsection
 
 @section ('active')
+<script>
+    $(document).ready(function () {
+        $("#pegawai").addClass("active");
+    });
 
+</script>
 @endsection
