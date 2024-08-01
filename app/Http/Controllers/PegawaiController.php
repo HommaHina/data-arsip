@@ -8,6 +8,8 @@ use App\Models\data_berkala;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use Validator;
+
 class PegawaiController extends Controller {
 
     /**
@@ -37,13 +39,19 @@ class PegawaiController extends Controller {
      */
     public function store(Request $request) {
 
-        $validasi=$request->validate([ 'nip'=> 'required|string|max:25',
+        Validator::extend('without_spaces', function($attr, $value){
+            return preg_match('/^\S*$/u', $value);
+        });
+
+        $validasi=$request->validate([ 'nip'=> 'required|string|max:25|without_spaces',
             'nama'=> 'required|string|max:100',
             'nohp'=> 'required|min:12|max:13',
             'alamat'=> 'required',
             'pasfoto'=> 'nullable|image|mimes:jpg,jpeg|max:1000'
             ],
-            [ 'nip.required'=> 'NIP Harus Diisi!!',
+            [
+            'nip.without_spaces'=> 'NIP Tidak Perlu Spasi',
+            'nip.required'=> 'NIP Harus Diisi!!',
             'nama.required'=> 'Nama Harus Diisi!!',
             'nohp.required'=> 'No HP Harus Diisi!!',
             'alamat.required'=> 'Alamat Harus Diisi!!',
@@ -119,14 +127,22 @@ class PegawaiController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
+
         $getID=data_pegawai::findorfail($id);
-        $validasi=$request->validate([ 'nip'=> 'required|string|max:25',
+
+        Validator::extend('without_spaces', function($attr, $value){
+            return preg_match('/^\S*$/u', $value);
+        });
+
+        $validasi=$request->validate([ 'nip'=> 'required|string|max:25|without_spaces',
             'nama'=> 'required|string|max:100',
             'nohp'=> 'required|min:12|max:13',
             'alamat'=> 'required',
             'pasfoto'=> 'nullable|image|mimes:jpg,jpeg|max:1000'
             ],
-            [ 'nip.required'=> 'NIP Harus Diisi!!',
+            [
+            'nip.without_spaces'=> 'NIP Tidak Perlu Spasi',
+            'nip.required'=> 'NIP Harus Diisi!!',
             'nama.required'=> 'Nama Harus Diisi!!',
             'nohp.required'=> 'No HP Harus Diisi!!',
             'alamat.required'=> 'Alamat Harus Diisi!!',
@@ -138,28 +154,52 @@ class PegawaiController extends Controller {
 
 
 
+        // if($request->file('pasfoto')) {
         if($request->file('pasfoto')) {
             // jika ada foto
             // $penamaan = time() . '-' . $request->nama . '.' . $request->pasfoto->extension();
-            $hpsfotolama=Storage::disk('public')->delete($request->pasfotolama);
-            $penamaan=$request->file('pasfoto')->store('assets/foto',
+
+            if($request->pasfotolama == null){
+                $penamaan=$request->file('pasfoto')->store('assets/foto',
                 'public'
             );
 
-            $updateInputan=$getID->update([ 'nip'=> $validasi['nip'],
+                $updateInputan=$getID->update([ 'nip'=> $validasi['nip'],
                 'nama'=> $validasi['nama'],
                 'nohp'=> $validasi['nohp'],
                 'alamat'=> $validasi['alamat'],
                 'pasfoto'=> $penamaan]);
 
-            if($updateInputan==true) {
-                Alert::error('Data Berhasil Diubah');
-                return redirect()->route('pegawai.index');
+                if($updateInputan==true) {
+                    Alert::success('Data Berhasil Diubah');
+                    return redirect()->route('pegawai.index');
+                }
+                else {
+                    Alert::error('Gagal');
+                    return redirect()->back();
+                }
             }
+            else{
+                $hpsfotolama=Storage::disk('public')->delete($request->pasfotolama);
+                $penamaan=$request->file('pasfoto')->store('assets/foto',
+                    'public'
+                );
 
-            else {
-                Alert::error('Gagal');
-                return redirect()->back();
+                $updateInputan=$getID->update([ 'nip'=> $validasi['nip'],
+                    'nama'=> $validasi['nama'],
+                    'nohp'=> $validasi['nohp'],
+                    'alamat'=> $validasi['alamat'],
+                    'pasfoto'=> $penamaan]);
+
+                if($updateInputan==true) {
+                    Alert::success('Data Berhasil Diubah');
+                    return redirect()->route('pegawai.index');
+                }
+
+                else {
+                    Alert::error('Gagal');
+                    return redirect()->back();
+                }
             }
 
         }

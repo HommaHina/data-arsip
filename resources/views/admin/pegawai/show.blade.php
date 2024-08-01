@@ -8,6 +8,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="tes">
+                        <div class="heroback text-right mb-2">
+                            <a href="{{ route('pegawai.index') }}" class="btn btn-primary btn-sm">
+                                Kembali
+                            </a>
+                        </div>
                         <div class="row">
                             <div class="col-md-4 text-center">
                                 <img src="{{ asset('storage/' . $data->pasfoto) }}"
